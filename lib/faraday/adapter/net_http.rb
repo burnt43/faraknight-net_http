@@ -9,9 +9,9 @@ rescue LoadError
 end
 require 'zlib'
 
-module Faraday
+module Faraknight
   class Adapter
-    class NetHttp < Faraday::Adapter
+    class NetHttp < Faraknight::Adapter
       exceptions = [
         IOError,
         Errno::EADDRNOTAVAIL,
@@ -65,13 +65,13 @@ module Faraday
         connection(env) do |http|
           perform_request(http, env)
         rescue *NET_HTTP_EXCEPTIONS => e
-          raise Faraday::SSLError, e if defined?(OpenSSL) && e.is_a?(OpenSSL::SSL::SSLError)
+          raise Faraknight::SSLError, e if defined?(OpenSSL) && e.is_a?(OpenSSL::SSL::SSLError)
 
-          raise Faraday::ConnectionFailed, e
+          raise Faraknight::ConnectionFailed, e
         end
         @app.call env
       rescue Timeout::Error, Errno::ETIMEDOUT => e
-        raise Faraday::TimeoutError, e
+        raise Faraknight::TimeoutError, e
       end
 
       private

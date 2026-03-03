@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Faraday::Adapter::NetHttp do
+RSpec.describe Faraknight::Adapter::NetHttp do
   features :request_body_on_query_methods,
            :reason_phrase_parse,
            :compression,
@@ -12,7 +12,7 @@ RSpec.describe Faraday::Adapter::NetHttp do
   context 'checking http' do
     let(:url) { URI('http://example.com') }
     let(:adapter) { described_class.new }
-    let(:ssl) { Faraday::SSLOptions.new }
+    let(:ssl) { Faraknight::SSLOptions.new }
     let(:http) { adapter.send(:connection, url: url, request: {}, ssl: ssl) }
 
     it { expect(http.port).to eq(80) }
@@ -48,7 +48,7 @@ RSpec.describe Faraday::Adapter::NetHttp do
     context 'with https url' do
       let(:url) { URI('https://example.com') }
       let(:ssl) do
-        Faraday::SSLOptions.new.tap do |ssl|
+        Faraknight::SSLOptions.new.tap do |ssl|
           ssl.verify_hostname = true if ssl.respond_to?(:verify_hostname=)
         end
       end
@@ -59,7 +59,7 @@ RSpec.describe Faraday::Adapter::NetHttp do
 
       it { expect(http.cert_store).not_to be_nil }
 
-      if Gem::Version.new(Faraday::VERSION) > Gem::Version.new('2.3.0') &&
+      if Gem::Version.new(Faraknight::VERSION) > Gem::Version.new('2.3.0') &&
          Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.0.0')
         it 'supports verify_hostname option' do
           adapter.send(:configure_ssl, http, ssl)
@@ -91,7 +91,7 @@ RSpec.describe Faraday::Adapter::NetHttp do
 
   context 'encoding' do
     let(:connection) do
-      Faraday.new('http://example.com') { |conn| conn.adapter :net_http }
+      Faraknight.new('http://example.com') { |conn| conn.adapter :net_http }
     end
 
     before do
@@ -160,7 +160,7 @@ RSpec.describe Faraday::Adapter::NetHttp do
     context 'when client_cert is provided as an array' do
       let(:cert_array) { [OpenSSL::X509::Certificate.new, OpenSSL::X509::Certificate.new] }
       let(:ssl_options) do
-        Faraday::SSLOptions.new.tap do |ssl_options|
+        Faraknight::SSLOptions.new.tap do |ssl_options|
           ssl_options.client_cert = cert_array
         end
       end
@@ -177,7 +177,7 @@ RSpec.describe Faraday::Adapter::NetHttp do
     context 'when client_cert is provided as a single cert' do
       let(:cert) { OpenSSL::X509::Certificate.new }
       let(:ssl_options) do
-        Faraday::SSLOptions.new.tap do |ssl_options|
+        Faraknight::SSLOptions.new.tap do |ssl_options|
           ssl_options.client_cert = cert
         end
       end

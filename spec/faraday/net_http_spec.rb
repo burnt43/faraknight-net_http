@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Faraday::NetHttp do
+RSpec.describe Faraknight::NetHttp do
   it 'has a version number' do
-    expect(Faraday::NetHttp::VERSION).to be_a(String)
+    expect(Faraknight::NetHttp::VERSION).to be_a(String)
   end
 end

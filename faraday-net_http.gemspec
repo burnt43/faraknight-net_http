@@ -2,16 +2,16 @@
 
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'faraday/net_http/version'
+require 'faraknight/net_http/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'faraday-net_http'
-  spec.version = Faraday::NetHttp::VERSION
+  spec.name = 'faraknight-net_http'
+  spec.version = Faraknight::NetHttp::VERSION
   spec.authors = ['Jan van der Pas']
   spec.email = ['janvanderpas@gmail.com']
 
-  spec.summary = 'Faraday adapter for Net::HTTP'
-  spec.description = 'Faraday adapter for Net::HTTP'
+  spec.summary = 'Faraknight adapter for Net::HTTP'
+  spec.description = 'Faraknight adapter for Net::HTTP'
   spec.homepage = 'https://github.com/lostisland/faraday-net_http'
   spec.license = 'MIT'
 

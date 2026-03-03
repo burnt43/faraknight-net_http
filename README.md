@@ -1,6 +1,6 @@
-# Faraday Net::HTTP adapter
+# Faraknight Net::HTTP adapter
 
-This gem is a [Faraday][faraday] adapter for the [Net::HTTP][net-http] library. Faraday is an HTTP client library that provides a common interface over many adapters. Every adapter is defined into it's own gem. This gem defines the adapter for `Net::HTTP` the HTTP library that's included into the standard library of Ruby.
+This gem is a [Faraknight][faraday] adapter for the [Net::HTTP][net-http] library. Faraknight is an HTTP client library that provides a common interface over many adapters. Every adapter is defined into it's own gem. This gem defines the adapter for `Net::HTTP` the HTTP library that's included into the standard library of Ruby.
 
 ## Installation
 
@@ -21,7 +21,7 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-conn = Faraday.new(...) do |f|
+conn = Faraknight.new(...) do |f|
   f.adapter :net_http do |http|
     # yields Net::HTTP
     http.verify_callback = lambda do |preverify, cert_store|
@@ -47,7 +47,7 @@ The gem is available as open source under the terms of the [license][license].
 
 ## Code of Conduct
 
-Everyone interacting in the Faraday Net::HTTP adapter project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct][code-of-conduct].
+Everyone interacting in the Faraknight Net::HTTP adapter project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct][code-of-conduct].
 
 [faraday]: https://github.com/lostisland/faraday
 [net-http]: https://ruby-doc.org/stdlib-2.7.0/libdoc/net/http/rdoc/Net/HTTP.html

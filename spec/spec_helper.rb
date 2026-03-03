@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'faraday'
-require 'faraday/net_http'
-require 'faraday_specs_setup'
+require 'faraknight'
+require 'faraknight/net_http'
+require 'faraknight_specs_setup'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'faraday/adapter/net_http'
-require 'faraday/net_http/version'
+require 'faraknight/adapter/net_http'
+require 'faraknight/net_http/version'
 
-module Faraday
+module Faraknight
   module NetHttp
-    Faraday::Adapter.register_middleware(net_http: Faraday::Adapter::NetHttp)
+    Faraknight::Adapter.register_middleware(net_http: Faraknight::Adapter::NetHttp)
   end
 end
