@@ -2,6 +2,6 @@
 
 module Faraknight
   module NetHttp
-    VERSION = '3.4.2.a'
+    VERSION = '3.4.2.b'
   end
 end
