@@ -63,11 +63,13 @@ module Faraknight
       def call(env)
         super
         connection(env) do |http|
-          perform_request(http, env)
-        rescue *NET_HTTP_EXCEPTIONS => e
-          raise Faraknight::SSLError, e if defined?(OpenSSL) && e.is_a?(OpenSSL::SSL::SSLError)
+          begin
+            perform_request(http, env)
+          rescue IOError, Errno::EADDRNOTAVAIL, Errno::EALREADY, Errno::ECONNABORTED, Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EHOSTUNREACH, Errno::EINVAL, Errno::ENETUNREACH, Errno::EPIPE, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError, SocketError, Zlib::GzipFile::Error => e
+            raise Faraknight::SSLError, e if defined?(OpenSSL) && e.is_a?(OpenSSL::SSL::SSLError)
 
-          raise Faraknight::ConnectionFailed, e
+            raise Faraknight::ConnectionFailed, e
+          end
         end
         @app.call env
       rescue Timeout::Error, Errno::ETIMEDOUT => e
@@ -189,11 +191,13 @@ module Faraknight
       def encoded_body(http_response)
         body = http_response.body || +''
         /\bcharset=([^;]+)/.match(http_response['Content-Type']) do |match|
-          content_charset = ::Encoding.find(match[1].strip)
-          body = body.dup if body.frozen?
-          body.force_encoding(content_charset)
-        rescue ArgumentError
-          nil
+          begin
+            content_charset = ::Encoding.find(match[1].strip)
+            body = body.dup if body.frozen?
+            body.force_encoding(content_charset)
+          rescue ArgumentError
+            nil
+          end
         end
         body
       end
